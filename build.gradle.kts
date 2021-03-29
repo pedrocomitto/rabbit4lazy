@@ -16,8 +16,8 @@ buildscript {
 	}
 }
 
-group = "com.pedrocomitto"
-version = "0.0.2"
+group = "com.github.pedrocomitto"
+version = "0.0.1"
 
 base {
 	archivesBaseName = "rabbit4lazy"
