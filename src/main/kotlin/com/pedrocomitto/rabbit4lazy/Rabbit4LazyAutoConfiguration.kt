@@ -1,6 +1,7 @@
 package com.pedrocomitto.rabbit4lazy
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import org.slf4j.LoggerFactory
 import org.springframework.amqp.core.BindingBuilder
 import org.springframework.amqp.core.QueueBuilder
 import org.springframework.amqp.core.TopicExchange
@@ -16,6 +17,8 @@ import org.springframework.context.annotation.Configuration
 @EnableConfigurationProperties(value = [RabbitBindingProperties::class])
 class Rabbit4LazyAutoConfiguration {
 
+    private val log = LoggerFactory.getLogger(javaClass)
+
     @Bean
     fun rabbitAdmin(rabbitTemplate: RabbitTemplate, rabbitBindingProperties: RabbitBindingProperties): RabbitAdmin {
         val rabbitAdmin = RabbitAdmin(rabbitTemplate)
@@ -23,6 +26,8 @@ class Rabbit4LazyAutoConfiguration {
         rabbitTemplate.isChannelTransacted = true
 
         rabbitBindingProperties.bindings.values.forEach { binding ->
+            log.info("Creating exchange, queue and DLQ for $binding")
+
             val exchange = TopicExchange(binding.exchangeName, true, false)
             rabbitAdmin.declareExchange(exchange)
 
@@ -46,12 +51,14 @@ class Rabbit4LazyAutoConfiguration {
     }
 
     @Bean
-    fun genericProducer(rabbitTemplate: RabbitTemplate, rabbitBindingProperties: RabbitBindingProperties) =
-        GenericProducer(rabbitTemplate, rabbitBindingProperties)
+    fun genericProducer(rabbitTemplate: RabbitTemplate, rabbitBindingProperties: RabbitBindingProperties): GenericProducer {
+        return GenericProducer(rabbitTemplate, rabbitBindingProperties)
+    }
 
     @Bean
     fun messageConverter(objectMapper: ObjectMapper): MessageConverter {
         return Jackson2JsonMessageConverter(objectMapper)
+
     }
 
 }

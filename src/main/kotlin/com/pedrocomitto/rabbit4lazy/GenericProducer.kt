@@ -8,7 +8,8 @@ class GenericProducer(
 ) {
 
      fun produce(bindingName: String, message: Any) {
-        val rabbitBinding = rabbitBindingProperties.bindings[bindingName] ?: throw IllegalArgumentException("binding not found")
+        val rabbitBinding = rabbitBindingProperties.bindings[bindingName]
+            ?: throw IllegalArgumentException("binding not found")
 
         rabbitTemplate.convertAndSend(rabbitBinding.exchangeName, rabbitBinding.queueRoutingKey, message)
     }

@@ -17,14 +17,13 @@ buildscript {
 }
 
 group = "com.github.pedrocomitto"
-version = "0.0.1"
+version = "1.0.0"
 
 base {
 	archivesBaseName = "rabbit4lazy"
 }
 
 signing {
-//	useGpgCmd()
 	sign(configurations.archives.get())
 }
 
@@ -81,11 +80,11 @@ tasks {
 	}
 }
 
-val deployerJars by configurations.creating
-
-dependencies {
-	deployerJars("org.apache.maven.wagon:wagon-ssh:2.2")
-}
+//val deployerJars by configurations.creating
+//
+//dependencies {
+//	deployerJars("org.apache.maven.wagon:wagon-ssh:2.2")
+//}
 
 
 tasks.named<Upload>("uploadArchives") {
@@ -103,7 +102,6 @@ tasks.named<Upload>("uploadArchives") {
 					signing.signPom(this)
 				}
 				withGroovyBuilder {
-//					setProperty("configuration", deployerJars)
 					"repository"("url" to releasesRepoUrl) {
 						"authentication"("userName" to ossrhUsername, "password" to ossrhPassword)
 					}
