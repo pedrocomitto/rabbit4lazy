@@ -58,7 +58,7 @@ send-notification.queue.dlq
 
 Now you can use a Spring Bean called "GenericProducer" to send data:
 
-genericProducer.produce(String bindingName, Object message)
+```genericProducer.produce(String bindingName, Object message)```
 
 Example:
 
