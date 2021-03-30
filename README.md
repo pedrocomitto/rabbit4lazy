@@ -34,7 +34,7 @@ spring:
     username: guest
     password: guest
     bindings: <------- rabbit4lazy binding
-      send-notification: <----- binding name
+      send-notification: <----- example binding name
         autoGenerate: true <---- automatically generates an exchange, a queue and a DLQ
 ```
 
@@ -95,7 +95,7 @@ spring:
     username: guest
     password: guest
     bindings: <------- rabbit4lazy binding
-      send-notification: <----- binding name
+      send-notification: <----- example binding name
         exchangeName: send-sms.exchange
         queueName: send-sms.queue
         dlqName: send-sms.queue.dlq
