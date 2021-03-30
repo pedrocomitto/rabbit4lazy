@@ -56,11 +56,6 @@ tasks.withType<KotlinCompile> {
 	}
 }
 
-//tasks.withType<Test> {
-//	useJUnitPlatform()
-//}
-
-
 tasks {
 	val sourcesJar by creating(Jar::class) {
 		archiveClassifier.set("sources")
@@ -80,19 +75,11 @@ tasks {
 	}
 }
 
-//val deployerJars by configurations.creating
-//
-//dependencies {
-//	deployerJars("org.apache.maven.wagon:wagon-ssh:2.2")
-//}
-
-
 tasks.named<Upload>("uploadArchives") {
 	val releasesRepoUrl = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
 	val snapshotsRepoUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
 	val ossrhUsername = project.ext.properties["ossrhUsername"].toString()
 	val ossrhPassword = project.ext.properties["ossrhPassword"].toString()
-
 
 	repositories {
 		withConvention(MavenRepositoryHandlerConvention::class) {
