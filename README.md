@@ -85,7 +85,7 @@ The above example, will send a message to the "send-notification.exchange".
 
 ### Other customizations
 
-Alternatively, you can define your own exachange, queue and dlq names:
+Alternatively, you can define your own exchange, queue and dlq names:
 
 ```
 spring:
