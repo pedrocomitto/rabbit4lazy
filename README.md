@@ -1,6 +1,6 @@
 # rabbit4lazy
 
-### The fastest way to set up RabbitMQ in your Spring Boot application
+### The l̶a̶z̶i̶e̶s̶t̶ fastest way to set up RabbitMQ in your Spring Boot application
 
 ### Install
 
